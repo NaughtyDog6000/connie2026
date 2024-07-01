@@ -3,13 +3,18 @@
  * @see https://v0.dev/t/BpJQ646Msj2
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+import NavBar from "@/components/navbar";
+import CountdownTimer from "@/components/timer";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
+    const weddingDate: Date = new Date('2024-08-31T00:00:00');
+
     return (
         <div className="flex flex-col min-h-[100dvh]">
+            <NavBar />
             <header className="bg-primary text-primary-foreground py-6 px-4 md:px-6">
                 <div className="container flex flex-col items-center gap-4 md:flex-row md:justify-between">
                     <div className="text-center md:text-left">
@@ -26,6 +31,8 @@ export default function HomePage() {
                 </div>
             </header>
             <main className="flex-1">
+                <CountdownTimer targetDate={weddingDate} />
+
                 <section className="py-12 md:py-16 lg:py-20 bg-background">
                     <div className="container">
                         <div className="grid gap-8 md:grid-cols-2 items-center">
@@ -74,13 +81,10 @@ export default function HomePage() {
             </main>
             <footer className="bg-muted text-muted-foreground py-6 px-4 md:px-6">
                 <div className="container flex justify-between items-center">
-                    <p>&copy; 2023 Sarah &amp; John. All rights reserved.</p>
+                    <p>&copy; 2024 Connor &amp; Ronnie All rights reserved.</p>
                     <nav className="flex gap-4">
-                        <Link to={"/"} className="hover:underline" >
-                            Privacy Policy
-                        </Link>
-                        <Link to={"/"} className="hover:underline" >
-                            Terms of Service
+                        <Link to={"https://nd6k.uk"} className="hover:underline" >
+                            Made By Rob
                         </Link>
                     </nav>
                 </div>
@@ -167,19 +171,18 @@ function FindOutMoreSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Crate & Barrel</CardTitle>
+                            <CardTitle>Venue info</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <p className="text-muted-foreground">
-                                Sarah and John have created a registry at Crate & Barrel. Browse their selection of home goods,
-                                kitchenware, and more.
+                                Address and location Details
                             </p>
                             <div className="mt-4">
                                 <Link
                                     to={"/"}
                                     className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                                 >
-                                    View Registry
+                                    Learn More
                                 </Link>
                             </div>
                         </CardContent>
@@ -198,7 +201,7 @@ function FindOutMoreSection() {
                                     to={"/"}
                                     className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                                 >
-                                    View Registry
+                                    Learn More
                                 </Link>
                             </div>
                         </CardContent>
@@ -216,7 +219,7 @@ function FindOutMoreSection() {
                                     to={"/"}
                                     className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                                 >
-                                    View Registry
+                                    Learn More
                                 </Link>
                             </div>
                         </CardContent>
@@ -271,3 +274,36 @@ function KeyGuestsSection() {
         </section>
     )
 }
+
+
+
+// function CountdownSection({ targetDate }: { targetDate: Date }) {
+//     const [currentTime, setTime] = useState(Date.now());
+
+//     useEffect(() => {
+//         const interval = setInterval(() => setTime(Date.now()), 1000);
+//         return () => {
+//             clearInterval(interval);
+//         };
+//     }, []);
+
+//     const diff = +targetDate - currentTime;
+
+//     const days = Math.floor(diff / (1000 * 60 * 60 * 24)) + "";
+//     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24) + "";
+//     const minutes = Math.floor((diff / (1000 * 60)) % 60) + "";
+//     const seconds = Math.floor((diff / 1000) % 60) + "";
+
+//     return (
+//         <section className="py-12 md:py-16 lg:py-20">
+//             <div className="countdown">
+//                 <div data-content="Days">{days.length === 1 ? `0${days}` : days}</div>
+//                 <div data-content="Hours">{hours.length === 1 ? `0${hours}` : hours}</div>
+//                 <div data-content="Minutes">{minutes.length === 1 ? `0${minutes}` : minutes
+//                 }</div>
+//                 <div data-content="Seconds">{seconds.length === 1 ? `0${seconds}` : seconds
+//                 }</div>
+//             </div>
+//         </section >
+//     )
+// }

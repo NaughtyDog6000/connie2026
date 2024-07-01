@@ -67,10 +67,15 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        flip: {
+          '0%, 100%': { transform: 'rotateX(0deg)' },
+          '50%': { transform: 'rotateX(180deg)' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        flip: 'flip 1s infinite',
       },
     },
   },

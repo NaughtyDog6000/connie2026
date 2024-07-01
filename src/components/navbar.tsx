@@ -1,0 +1,44 @@
+import { Link } from "react-router-dom";
+import { DarkmodeDropdown } from "./darkmode-button";
+
+export default function NavBar() {
+    return (
+        <nav className="flex h-16 w-full items-center justify-between bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-navbar pr-4 pl-2 md:pr-6 bg-nav-bar drop-shadow-sm">
+            <div className="flex items-center h-full">
+
+                <Link to="/">
+                    <img src="/Robco-Logo-No-BG-White.svg"
+                        width={128}
+                        height={64}
+                        className="h-full hidden dark:block"
+                        alt="Robco Logo"
+                    />
+                    <img
+                        className="h-full block dark:hidden"
+                        src="/Robco-Logo-No-BG-Black.svg"
+                        alt="light-mode-image"
+                        width={128}
+                        height={64}
+                    />
+                </Link>
+            </div>
+            <nav className="hidden md:flex">
+                <ul className="flex items-center space-x-12">
+                    <li>
+                        <Link to="/" className="text-m font-semibold hover:underline hover:underline-offset-4">
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/test" className="text-m font-semibold hover:underline hover:underline-offset-4">
+                            test
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+            <div className="flex items-center space-x-4">
+                <DarkmodeDropdown />
+            </div >
+        </nav >
+    )
+}

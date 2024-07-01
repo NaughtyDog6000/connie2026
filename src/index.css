@@ -74,3 +74,44 @@
       @apply bg-background text-foreground;
     }
   }
+
+
+  
+  .countdown {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .countdown div {
+    width: 13rem;
+    height: 13rem;
+    background: linear-gradient(
+      to bottom,
+      rgba(61, 58, 58, 0.9) 50%,
+      rgba(99, 93, 93, 0.9) 0
+    );
+    margin: 0 4rem 12rem 4rem;
+    font-size: 7rem;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0.8rem 2.5rem rgba(0, 0, 0, 0.5);
+    position: relative;
+  }
+  
+  .countdown div::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0.24rem;
+    background-color: #17181b;
+  }
+  
+  .countdown div::after {
+    content: attr(data-content);
+    font-size: 2.2rem;
+    font-weight: 400;
+    position: absolute;
+    bottom: -6rem;
+  }
