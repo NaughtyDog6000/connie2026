@@ -3,6 +3,8 @@
  * @see https://v0.dev/t/BpJQ646Msj2
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+import { Footer } from "@/components/footer";
+import { LocationSection } from "@/components/location-section";
 import NavBar from "@/components/navbar";
 import CountdownTimer from "@/components/timer";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
@@ -32,63 +34,12 @@ export default function HomePage() {
             </header>
             <main className="flex-1">
                 <CountdownTimer targetDate={weddingDate} />
-
-                <section className="py-12 md:py-16 lg:py-20 bg-background">
-                    <div className="container">
-                        <div className="grid gap-8 md:grid-cols-2 items-center">
-                            <div>
-                                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">About Us</h2>
-                                <p className="mt-4 text-muted-foreground">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur architecto optio temporibus cupiditate ad, distinctio reiciendis alias assumenda possimus, repellat numquam obcaecati commodi eos. Atque aut nostrum accusamus quia aliquam?
-                                </p>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <img
-                                    src="/placeholder.svg"
-                                    alt="Wedding Photo 1"
-                                    width={300}
-                                    height={300}
-                                    className="rounded-lg object-cover"
-                                />
-                                <img
-                                    src="/placeholder.svg"
-                                    alt="Wedding Photo 2"
-                                    width={300}
-                                    height={300}
-                                    className="rounded-lg object-cover"
-                                />
-                                <img
-                                    src="/placeholder.svg"
-                                    alt="Wedding Photo 3"
-                                    width={300}
-                                    height={300}
-                                    className="rounded-lg object-cover"
-                                />
-                                <img
-                                    src="/placeholder.svg"
-                                    alt="Wedding Photo 4"
-                                    width={300}
-                                    height={300}
-                                    className="rounded-lg object-cover"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <LocationSection />
                 <KeyGuestsSection />
                 <WeddingGallary />
                 <FindOutMoreSection />
             </main>
-            <footer className="bg-muted text-muted-foreground py-6 px-4 md:px-6">
-                <div className="container flex justify-between items-center">
-                    <p>&copy; 2024 Connor &amp; Ronnie All rights reserved.</p>
-                    <nav className="flex gap-4">
-                        <Link to={"https://nd6k.uk"} className="hover:underline" >
-                            Made By Rob
-                        </Link>
-                    </nav>
-                </div>
-            </footer>
+            <Footer />
         </div>
     )
 }
@@ -179,7 +130,7 @@ function FindOutMoreSection() {
                             </p>
                             <div className="mt-4">
                                 <Link
-                                    to={"/"}
+                                    to={"/location"}
                                     className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                                 >
                                     Learn More
@@ -189,16 +140,15 @@ function FindOutMoreSection() {
                     </Card>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Amazon</CardTitle>
+                            <CardTitle>Food & Drink</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <p className="text-muted-foreground">
-                                Sarah and John have also created a registry on Amazon. Find everything from kitchen appliances to
-                                home decor.
+                                Food and drinks menu for the event
                             </p>
                             <div className="mt-4">
                                 <Link
-                                    to={"/"}
+                                    to={"/menu"}
                                     className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                                 >
                                     Learn More
@@ -208,15 +158,15 @@ function FindOutMoreSection() {
                     </Card>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Zola</CardTitle>
+                            <CardTitle>Dresscode</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <p className="text-muted-foreground">
-                                Sarah and John have also created a registry on Zola. Find everything they need for their new home.
+                                Details about the dress code for the event
                             </p>
                             <div className="mt-4">
                                 <Link
-                                    to={"/"}
+                                    to={"/dresscode"}
                                     className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                                 >
                                     Learn More
@@ -274,36 +224,3 @@ function KeyGuestsSection() {
         </section>
     )
 }
-
-
-
-// function CountdownSection({ targetDate }: { targetDate: Date }) {
-//     const [currentTime, setTime] = useState(Date.now());
-
-//     useEffect(() => {
-//         const interval = setInterval(() => setTime(Date.now()), 1000);
-//         return () => {
-//             clearInterval(interval);
-//         };
-//     }, []);
-
-//     const diff = +targetDate - currentTime;
-
-//     const days = Math.floor(diff / (1000 * 60 * 60 * 24)) + "";
-//     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24) + "";
-//     const minutes = Math.floor((diff / (1000 * 60)) % 60) + "";
-//     const seconds = Math.floor((diff / 1000) % 60) + "";
-
-//     return (
-//         <section className="py-12 md:py-16 lg:py-20">
-//             <div className="countdown">
-//                 <div data-content="Days">{days.length === 1 ? `0${days}` : days}</div>
-//                 <div data-content="Hours">{hours.length === 1 ? `0${hours}` : hours}</div>
-//                 <div data-content="Minutes">{minutes.length === 1 ? `0${minutes}` : minutes
-//                 }</div>
-//                 <div data-content="Seconds">{seconds.length === 1 ? `0${seconds}` : seconds
-//                 }</div>
-//             </div>
-//         </section >
-//     )
-// }

@@ -8,6 +8,9 @@ import './index.css';
 import HomePage from './routes/homePage.tsx';
 import { InvitedPage } from './routes/InvitePage.tsx';
 import { TestPage } from './routes/testPage.tsx';
+import { LocationPage } from './routes/LocationPage.tsx';
+import { MenuPage } from './routes/menuPage.tsx';
+import { DressCodePage } from './routes/dressCodePage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -24,10 +27,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/location",
-    element: <h1>Location info</h1>
+    element: <LocationPage />
   },
   {
-
+    path: "/menu",
+    element: <MenuPage />
+  }, {
+    path: "/dresscode",
+    element: <DressCodePage />
   }
 ]);
 

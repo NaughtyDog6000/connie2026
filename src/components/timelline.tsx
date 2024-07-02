@@ -1,6 +1,7 @@
 import { Event } from "@/routes/testPage";
 import { format } from "date-fns";
 import CountdownTimer from "./timer";
+
 export default function Timeline({ events }: { events: Event[] }) {
     return (
         <div className="flex-row">
@@ -30,7 +31,7 @@ export function Timeline2({ events }: { events: Event[] }) {
     const now = new Date();
     return (
         <div className="flex-row">
-            <ol className="relative border-s border-gray-200 dark:border-gray-700">
+            <ol className="relative border-s border-gray-200 dark:border-black">
                 {events.map((event, index) => (
                     <li key={index} className="mb-10 ms-4">
                         {event.startTime > now ?
@@ -52,8 +53,18 @@ export function Timeline2({ events }: { events: Event[] }) {
 export function TimeTillFirstEvent({ first }: { first: Event }) {
     return (
         <>
-            <p className="dark:text-white text-gray-300 font-semibold text-lg">Time until first event:</p>
+            <h1 className="dark:text-white text-gray-300 font-semibold text-lg">Time until first event:</h1>
             <CountdownTimer targetDate={first.startTime} />
         </>
     )
+}
+
+// A card for the current event and its details
+export function CurrentEvent() {
+
+}
+
+// A card for the current event, how long until it starts and when it ends/length
+export function NextEvent() {
+
 }

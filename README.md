@@ -8,7 +8,8 @@
 
 - Meta for social embeds
 - Three fibre invite page
-- location maps
 - homepage
 - Timeline
 - Schedule
+- Alergin Key
+- Menu Filter options

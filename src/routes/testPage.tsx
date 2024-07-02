@@ -1,6 +1,5 @@
 import NavBar from "@/components/navbar";
-import Timeline, { TimeTillFirstEvent, Timeline2 } from "@/components/timelline";
-import { Slider } from "@/components/ui/slider";
+import { TimeTillFirstEvent, Timeline2 } from "@/components/timelline";
 
 export type Event = {
     startTime: Date;
@@ -45,12 +44,13 @@ export function TestPage() {
         <>
             <NavBar />
             <div className="flex flex-col items-center self-center justify-center min-h-screen bg-slate-700">
-                <Slider className="w-1/2" />
+                {/* <Slider className="w-1/2" /> */}
                 {
-                    events[0].startTime > new Date() &&
-                    <TimeTillFirstEvent first={events[0]} />
+                    events[0].startTime > new Date() ?
+                        <TimeTillFirstEvent first={events[0]} /> :
+                        <h1>Events Started!</h1>
                 }
-                <Timeline events={events} />
+                {/* <Timeline events={events} /> */}
                 <Timeline2 events={events} />
 
 
