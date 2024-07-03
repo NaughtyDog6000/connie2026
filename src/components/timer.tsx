@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 type TimeLeftStruct = {
@@ -7,7 +8,7 @@ type TimeLeftStruct = {
     seconds: number
 }
 
-const CountdownTimer = ({ targetDate }: { targetDate: Date }) => {
+const CountdownTimer = ({ className, targetDate }: { className?: string, targetDate: Date }) => {
     const calculateTimeLeft = () => {
         const difference = +new Date(targetDate) - +new Date();
         let timeLeft: TimeLeftStruct | Record<string, never> = {};
@@ -53,7 +54,7 @@ const CountdownTimer = ({ targetDate }: { targetDate: Date }) => {
     });
 
     return (
-        <div className="flex justify-center">
+        <div className={cn("flex justify-center", className)}>
             {timerComponents.length ? timerComponents : <span>Time's up!</span>}
         </div>
     );

@@ -23,6 +23,8 @@ export default function HomePage() {
                         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Connor & Ronnie</h1>
                         <p className="text-lg font-medium mt-2">Tying the Knot on June 10, 2023</p>
                     </div>
+                    <CountdownTimer className="text-center md:text-left" targetDate={weddingDate} />
+
                     <img
                         src="/placeholder.svg"
                         alt="Sarah and John"
@@ -33,7 +35,7 @@ export default function HomePage() {
                 </div>
             </header>
             <main className="flex-1">
-                <CountdownTimer targetDate={weddingDate} />
+                {/* <CountdownTimer targetDate={weddingDate} /> */}
                 <LocationSection />
                 <KeyGuestsSection />
                 <WeddingGallary />

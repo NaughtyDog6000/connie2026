@@ -13,3 +13,4 @@
 - Schedule
 - Alergin Key
 - Menu Filter options
+- Menu Item Details Dialog
