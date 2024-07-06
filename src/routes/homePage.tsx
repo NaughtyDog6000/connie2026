@@ -12,18 +12,18 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
-    const weddingDate: Date = new Date('2024-08-31T00:00:00');
+    const weddingDate: Date = new Date('2024-07-10T12:00:00');
 
     return (
         <div className="flex flex-col min-h-[100dvh]">
             <NavBar />
-            <header className="bg-primary text-primary-foreground py-6 px-4 md:px-6">
+            <header className="text-black dark:text-gray-200 bg-slate-300 text-primary-foreground py-6 px-4 md:px-6">
                 <div className="container flex flex-col items-center gap-4 md:flex-row md:justify-between">
                     <div className="text-center md:text-left">
                         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Connor & Ronnie</h1>
-                        <p className="text-lg font-medium mt-2">Tying the Knot on June 10, 2023</p>
+                        <p className="text-lg font-medium mt-2">Tying the Knot on July 10, 2024</p>
                     </div>
-                    <CountdownTimer className="text-center md:text-left" targetDate={weddingDate} />
+                    <CountdownTimer className="text-center dark:text-gray-200 text-black" targetDate={weddingDate} />
 
                     <img
                         src="/placeholder.svg"

@@ -2,31 +2,33 @@ import { Footer } from "@/components/footer";
 import NavBar from "@/components/navbar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuCheckboxItem } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuCheckboxItem, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { DropdownMenuRadioGroup } from "@radix-ui/react-dropdown-menu";
 import { BeefIcon, Bold, ChevronDownIcon, Egg, FishIcon, Italic, Milk, TurtleIcon, Underline, WheatIcon } from "lucide-react";
+import { useState } from "react";
 enum Allergin {
-    Nuts,
-    Diary,
-    Gluten,
-    Eggs,
-    Fish,
-    Shellfish,
-    Garlic
+    Nuts = "Nuts",
+    Diary = "Dairy",
+    Gluten = "Gluten",
+    Eggs = "Eggs",
+    Fish = "Fish",
+    Shellfish = "Shellfish",
+    Garlic = "Garlic",
 }
 
 enum DietaryChoices {
-    Vegan,
-    Vegetarian,
-    None
+    Vegan = "Vegan",
+    Vegetarian = "Vegetarian",
+    None = "None",
 }
 
 enum MealType {
-    Appetizer,
-    Entree,
-    Dessert,
-    Beverage
+    Appetizer = "Appetizer",
+    Entree = "Entree",
+    Dessert = "Dessert",
+    Beverage = "Beverage",
 }
 
 type MenuItem = {
@@ -106,6 +108,9 @@ const menuItems: MenuItem[] = [
 ]
 
 export function MenuPage() {
+    const [MealTypeSelector, setMealTypeSelector] = useState("all");
+    console.log(JSON.stringify(menuItems));
+
     return (
         <>
             <NavBar />
@@ -118,9 +123,9 @@ export function MenuPage() {
                     </p>
                 </div>
             </div>
-            <div>
+            <div className="flex justify-center px-2">
                 <TooltipProvider>
-                    <ToggleGroup type="multiple">
+                    <ToggleGroup type="multiple" className="px-2">
                         <Tooltip>
                             <TooltipTrigger>
                                 <ToggleGroupItem value="bold" aria-label="Toggle bold">
@@ -153,6 +158,23 @@ export function MenuPage() {
                         </Tooltip>
                     </ToggleGroup>
                 </TooltipProvider>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" className="px-2">
+                            Meal Type
+                            <ChevronDownIcon className="ml-auto h-4 w-4" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuRadioGroup value={MealTypeSelector} onValueChange={setMealTypeSelector}>
+                            <DropdownMenuRadioItem value="all">All</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="appetizer">Appetizer</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="entree">Entree</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="dessert">Dessert</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="beverage">Beverage</DropdownMenuRadioItem>
+                        </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
             <main className="flex-1">
                 <section className="container px-4 md:px-6 py-12 md:py-20">
@@ -182,20 +204,7 @@ export function MenuPage() {
                                         <DropdownMenuCheckboxItem>Dairy-free</DropdownMenuCheckboxItem>
                                     </DropdownMenuContent>
                                 </DropdownMenu>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="outline" className="w-full">
-                                            Meal Type
-                                            <ChevronDownIcon className="ml-auto h-4 w-4" />
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        <DropdownMenuCheckboxItem>Appetizer</DropdownMenuCheckboxItem>
-                                        <DropdownMenuCheckboxItem>Entree</DropdownMenuCheckboxItem>
-                                        <DropdownMenuCheckboxItem>Dessert</DropdownMenuCheckboxItem>
-                                        <DropdownMenuCheckboxItem>Beverage</DropdownMenuCheckboxItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
+
                             </div>
                         </div>
                     </div>

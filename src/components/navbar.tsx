@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DarkmodeDropdown } from "./darkmode-button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { ChevronDown } from "lucide-react";
 
 export default function NavBar() {
+    const navigate = useNavigate();
     const locations = [
         { path: "/", text: "Home" },
         { path: "/test", text: "TimeLine Test" },
@@ -42,6 +46,24 @@ export default function NavBar() {
 
                     }
                 </ul>
+            </nav>
+            <nav className="sm:flex md:hidden lg:hidden">
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline">
+                            Pages
+                            <ChevronDown />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        {locations.map((location, index) => (
+                            <DropdownMenuItem key={index} onClick={() => navigate(location.path)}>
+                                {location.text}
+                            </DropdownMenuItem>
+                        ))}
+
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </nav>
             <div className="flex items-center space-x-4">
                 <DarkmodeDropdown />
