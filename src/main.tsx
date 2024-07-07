@@ -11,6 +11,7 @@ import { TestPage } from './routes/testPage.tsx';
 import { LocationPage } from './routes/LocationPage.tsx';
 import { MenuPage } from './routes/menuPage.tsx';
 import { DressCodePage } from './routes/dressCodePage.tsx';
+import { SaveTheDatePage } from './routes/saveTheDatePage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   }, {
     path: "/dresscode",
     element: <DressCodePage />
+  },
+  {
+    path: "/save_the_date",
+    element: <SaveTheDatePage />
   }
 ]);
 
