@@ -12,6 +12,7 @@ export default function NavBar() {
         { path: "/location", text: "Location" },
         { path: "/menu", text: "Menu" },
         { path: "/dresscode", text: "Dress Code" },
+        { path: "/save_the_date", text: "Save The Date" },
     ]
 
     return (

@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Link } from "react-router-dom";
 
 export function SaveTheDatePage() {
 
@@ -58,7 +59,7 @@ export function SaveTheDatePage() {
                     </div>
                     <p className="text-2xl font-semibold">Ronnie & Connor</p>
                 </div>
-                <div title="Add to Calendar" className="addeventatc">
+                <div title="Add to Calendar" className="addeventatc mb-8">
                     Add to Calendar
                     <span className="start">05/30/2024 07:00 AM</span>
                     <span className="end">05/30/2024 7:00 PM</span>
@@ -68,7 +69,9 @@ export function SaveTheDatePage() {
                     <span className="description">The Wedding of Connor and Ronnie</span>
                     <span className="location">Water's Edge at Ewen, GL76BY</span>
                 </div>
-
+                <Link to={"/"} className="text-m font-semibold hover:underline hover:underline-offset-4 hover:text-blue-700">
+                    Back Home
+                </Link>
 
                 <div className="invisible md:visible lg:visible xl:visible absolute top-10 right-14 w-64 h-64 rotate-45 bg-[url('/paw-print.svg')] bg-no-repeat bg-contain" />
                 <div className="invisible md:visible lg:visible xl:visible absolute bottom-10 left-14 w-64 h-64 rotate-45 bg-[url('/paw-print.svg')] bg-no-repeat bg-contain" />
