@@ -8,11 +8,12 @@ export default function NavBar() {
     const navigate = useNavigate();
     const locations = [
         { path: "/", text: "Home" },
-        { path: "/test", text: "TimeLine Test" },
+        { path: "/timeline", text: "TimeLine" },
         { path: "/location", text: "Location" },
         { path: "/menu", text: "Menu" },
         { path: "/dresscode", text: "Dress Code" },
         { path: "/save_the_date", text: "Save The Date" },
+        { path: "/test", text: "Debug" },
     ]
 
     return (

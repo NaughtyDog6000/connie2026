@@ -7,8 +7,25 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { setTheme, Theme } from "@/lib/utils"
 
 export function DarkmodeDropdown() {
+    function setDark() {
+        console.error("dark")
+        setTheme(Theme.Dark)
+    }
+
+    function setLight() {
+        console.error("light")
+        setTheme(Theme.Light)
+
+    }
+
+    function setSystem() {
+        console.error("system")
+        setTheme(Theme.System)
+    }
+
 
     return (
         <DropdownMenu>
@@ -20,13 +37,13 @@ export function DarkmodeDropdown() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => console.error("light")}>
+                <DropdownMenuItem onClick={setLight}>
                     Light
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => console.error("dark")}>
+                <DropdownMenuItem onClick={setDark}>
                     Dark
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => console.error("system")}>
+                <DropdownMenuItem onClick={setSystem}>
                     System
                 </DropdownMenuItem>
             </DropdownMenuContent>

@@ -12,6 +12,7 @@ import { LocationPage } from './routes/LocationPage.tsx';
 import { MenuPage } from './routes/menuPage.tsx';
 import { DressCodePage } from './routes/dressCodePage.tsx';
 import { SaveTheDatePage } from './routes/saveTheDatePage.tsx';
+import { TimeLinePage } from './routes/timeLinePage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/test",
     element: <TestPage />
+  },
+  {
+    path: "/timeline",
+    element: <TimeLinePage />
   },
   {
     path: "/location",

@@ -3,13 +3,17 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      cursive: ["Oswald"],
+      lobster: ["Lobster Two"],
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -68,16 +72,17 @@ module.exports = {
           to: { height: "0" },
         },
         flip: {
-          '0%, 100%': { transform: 'rotateX(0deg)' },
-          '50%': { transform: 'rotateX(180deg)' },
+          "0%, 100%": { transform: "rotateX(0deg)" },
+          "50%": { transform: "rotateX(180deg)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        flip: 'flip 1s infinite',
+        flip: "flip 1s infinite",
       },
     },
   },
+  // eslint-disable-next-line no-undef
   plugins: [require("tailwindcss-animate")],
-}
+};

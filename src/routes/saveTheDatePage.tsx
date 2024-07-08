@@ -57,7 +57,7 @@ export function SaveTheDatePage() {
                         <span className="bg-[#5a3e36] text-[#deb887] rounded-full w-8 h-8 flex items-center justify-center">30</span>
                         <span>31</span>
                     </div>
-                    <p className="text-2xl font-semibold">Ronnie & Connor</p>
+                    <p className="text-2xl font-semibold font-lobster">Ronnie & Connor</p>
                 </div>
                 <div title="Add to Calendar" className="addeventatc mb-8">
                     Add to Calendar
