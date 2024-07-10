@@ -7,13 +7,13 @@ import { ChevronDown } from "lucide-react";
 export default function NavBar() {
     const navigate = useNavigate();
     const locations = [
-        { path: "/", text: "Home" },
+        // { path: "/", text: "Home" },
         { path: "/timeline", text: "TimeLine" },
         { path: "/location", text: "Location" },
         { path: "/menu", text: "Menu" },
         { path: "/dresscode", text: "Dress Code" },
         { path: "/save_the_date", text: "Save The Date" },
-        { path: "/test", text: "Debug" },
+        { path: "/RSVP", text: "RSVP" },
     ]
 
     return (
@@ -21,19 +21,7 @@ export default function NavBar() {
             <div className="flex items-center h-full">
 
                 <Link to="/">
-                    <img src="/Robco-Logo-No-BG-White.svg"
-                        width={128}
-                        height={64}
-                        className="h-full hidden dark:block"
-                        alt="Robco Logo"
-                    />
-                    <img
-                        className="h-full block dark:hidden"
-                        src="/Robco-Logo-No-BG-Black.svg"
-                        alt="light-mode-image"
-                        width={128}
-                        height={64}
-                    />
+                    <h1 className="text-2xl font-bold tracking-tight font-lobster pl-2">Connie 2026</h1>
                 </Link>
             </div>
             <nav className="hidden md:flex">

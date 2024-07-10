@@ -12,7 +12,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
-    const weddingDate: Date = new Date('2024-07-10T12:00:00');
+    const weddingDate: Date = new Date('2026-05-30T12:00:00');
 
     return (
         <div className="flex flex-col min-h-[100dvh]">

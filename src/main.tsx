@@ -13,10 +13,11 @@ import { MenuPage } from './routes/menuPage.tsx';
 import { DressCodePage } from './routes/dressCodePage.tsx';
 import { SaveTheDatePage } from './routes/saveTheDatePage.tsx';
 import { TimeLinePage } from './routes/timeLinePage.tsx';
+import { RSVPage } from './routes/RSVPage.tsx';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "*",
     element: <HomePage />,
   },
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/save_the_date",
     element: <SaveTheDatePage />
+  },
+  {
+    path: "/RSVP",
+    element: <RSVPage />
   }
 ]);
 

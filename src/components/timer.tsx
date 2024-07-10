@@ -55,7 +55,7 @@ const CountdownTimer = ({ className, targetDate }: { className?: string, targetD
 
     return (
         <div className={cn("flex justify-center", className)}>
-            {timerComponents.length ? timerComponents : <span>Time's up!</span>}
+            {timerComponents.length ? timerComponents : <span>Its Started! 🎉</span>}
         </div>
     );
 };

@@ -8,7 +8,6 @@
 
 - Meta for social embeds
 - Three fibre invite page
-- homepage
 - Timeline
 - Schedule
 - Alergin Key
