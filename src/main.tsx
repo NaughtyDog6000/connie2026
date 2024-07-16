@@ -15,6 +15,9 @@ import { SaveTheDatePage } from './routes/saveTheDatePage.tsx';
 import { TimeLinePage } from './routes/timeLinePage.tsx';
 import { RSVPage } from './routes/RSVPage.tsx';
 
+export const APIURL = "https://connie-api.nd6k.uk/";
+
+
 const router = createBrowserRouter([
   {
     path: "*",

@@ -13,3 +13,6 @@
 - Alergin Key
 - Menu Filter options
 - Menu Item Details Dialog
+
+- Notification on submission of RSVP
+- Prevent re-submission via storing locally if previously submitted / jwt

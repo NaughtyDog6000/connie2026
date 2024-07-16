@@ -12,28 +12,55 @@ export function RSVPage() {
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { APIURL } from "@/main";
+import { useState } from "react";
+import { redirect } from "react-router-dom";
 
 export default function RSVPContent() {
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+
+
+    async function submitRSVP(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         const name = formData.get("name")
         const email = formData.get("email")
         const attendees_str = formData.get("attendees")
         const attendees: number = Number(attendees_str)
-        console.log({ name, email, attendees })
-
-        await fetch("https://connie-api.nd6k.uk/rsvp", {
+        setSubmitting(true);
+        const response = await fetch(APIURL + "/rsvp", {
             method: "POST",
-            mode: "no-cors",
+            mode: "cors",
             headers: {
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
                 "Content-Type": "application/json",
             },
 
             body: JSON.stringify({ name, email, attendees }),
-        });
+        })
+
+        console.log('Response Status Code:', response.status);
+
+        if (response.status === 200 || response.status === 201) {
+            const data = await response.json();
+            const { token, rsvp } = data;
+            localStorage.setItem("rsvp", JSON.stringify(rsvp));
+            localStorage.setItem("rsvp_token", JSON.stringify(token));
+            setSubmitted(true)
+        }
+
+
+        setSubmitting(false);
     }
 
+    const rsvp_string = localStorage.getItem("rsvp");
+    // @ts-expect-error only read in the case that we have rsvp data
+    const rsvp = JSON.parse(rsvp_string);
+    if (rsvp !== null && !submitted) {
+        setSubmitted(true)
+    }
 
     return (
         <div className="mx-auto max-w-[600px] space-y-8 py-12 px-4 md:px-0">
@@ -43,23 +70,106 @@ export default function RSVPContent() {
                     Let us know that you will be in attendance.
                 </p>
             </div>
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            {
+                !submitted ?
+
+                    <form className="space-y-4" onSubmit={submitRSVP}>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="name">Name</Label>
+                                <Input id="name" name="name" placeholder="John Doe" defaultValue={"John Doe"} required />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input id="email" name="email" type="email" placeholder="john@example.com" defaultValue="john@example.com" required />
+                            </div>
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="attendees">Number of Attendees</Label>
+                            <Input id="attendees" name="attendees" type="number" placeholder="2" min="1" max="10" defaultValue={1} required />
+                        </div>
+                        <Button type="submit" className="w-full" disabled={submitting}>
+                            RSVP
+                        </Button>
+                    </form>
+                    : <PreviouslySubmitted />
+
+            }
+        </div>
+    )
+}
+
+
+function PreviouslySubmitted() {
+    const [submitting, setSubmitting] = useState(false);
+
+    const updateRSVP = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const formData = new FormData(event.currentTarget)
+        const name = formData.get("name")
+        const email = formData.get("email")
+        const attendees = Number(formData.get("attendees"));
+
+        let token = localStorage.getItem("rsvp_token");
+        if (token === null) {
+            console.error("no rsvp data when it is expected to be there")
+            redirect("/error");
+        }
+        // @ts-expect-error checked above
+        token = JSON.parse(token);
+
+        setSubmitting(true);
+        const response = await fetch(APIURL + "/rsvp", {
+            method: "PATCH",
+            mode: "cors",
+            headers: {
+                "Accept": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                "Authorization": `${token}`
+            },
+
+            body: JSON.stringify({ name, email, attendees }),
+        })
+
+        if (response.status === 200 || response.status === 201) {
+            const rsvp = await response.json();
+            localStorage.setItem("rsvp", JSON.stringify(rsvp));
+        }
+
+        setSubmitting(false);
+    }
+
+
+    const rsvp_data_string = localStorage.getItem("rsvp");
+    // @ts-expect-error only read in the case that we have rsvp data
+    const rsvp_data = JSON.parse(rsvp_data_string);
+    if (rsvp_data === null) {
+        console.error("no rsvp data when it is expected to be there")
+        redirect("/error");
+    }
+    const { name, email, attendees } = rsvp_data;
+
+    return (
+        <div className="text-center justify-center">
+            <h1 className="text-3xl font-bold">You have previously submitted an RSVP, you may update it below</h1>
+            <form className="space-y-4" onSubmit={updateRSVP}>
                 <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <Label htmlFor="name">Name</Label>
-                        <Input id="name" name="name" placeholder="John Doe" required />
+                        <Input id="name" name="name" placeholder="John Doe" defaultValue={name} required />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="email">Email</Label>
-                        <Input id="email" name="email" type="email" placeholder="john@example.com" required />
+                        <Input id="email" name="email" type="email" defaultValue={email} required />
                     </div>
                 </div>
                 <div className="space-y-2">
                     <Label htmlFor="attendees">Number of Attendees</Label>
-                    <Input id="attendees" name="attendees" type="number" placeholder="2" min="1" max="10" required />
+                    <Input id="attendees" name="attendees" type="number" placeholder="2" min="1" max="20" defaultValue={attendees} required />
                 </div>
-                <Button type="submit" className="w-full">
-                    RSVP
+                <Button type="submit" className="w-full" disabled={submitting}>
+                    Update
                 </Button>
             </form>
         </div>
