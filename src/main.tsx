@@ -14,9 +14,9 @@ import { DressCodePage } from './routes/dressCodePage.tsx';
 import { SaveTheDatePage } from './routes/saveTheDatePage.tsx';
 import { TimeLinePage } from './routes/timeLinePage.tsx';
 import { RSVPage } from './routes/RSVPage.tsx';
+import { Toaster } from './components/ui/sonner.tsx';
 
-export const APIURL = "https://connie-api.nd6k.uk/";
-
+export const APIURL = "https://connie-api.nd6k.uk";
 
 const router = createBrowserRouter([
   {
@@ -65,5 +65,6 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <Toaster />
   </React.StrictMode>,
 )

@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button"
 import { APIURL } from "@/main";
 import { useState } from "react";
 import { redirect } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function RSVPContent() {
     const [submitted, setSubmitted] = useState(false);
@@ -74,7 +75,7 @@ export default function RSVPContent() {
                 !submitted ?
 
                     <form className="space-y-4" onSubmit={submitRSVP}>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="md:grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="name">Name</Label>
                                 <Input id="name" name="name" placeholder="John Doe" defaultValue={"John Doe"} required />
@@ -135,9 +136,44 @@ function PreviouslySubmitted() {
         if (response.status === 200 || response.status === 201) {
             const rsvp = await response.json();
             localStorage.setItem("rsvp", JSON.stringify(rsvp));
+            toast("RSVP Updated successfully")
+        } else {
+            toast("Failed to update RSVP, please try again or check your connection")
         }
 
+
+        console.log('Response Status Code:', response.status);
         setSubmitting(false);
+    }
+
+    const cancelRSVP = async () => {
+
+        let token = localStorage.getItem("rsvp_token");
+        if (token === null) {
+            console.error("no rsvp data when it is expected to be there")
+            redirect("/error");
+        }
+        setSubmitting(true);
+
+        // @ts-expect-error checked above
+        token = JSON.parse(token);
+        const response = await fetch(APIURL + "/rsvp", {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                "Accept": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                "Authorization": `${token}`
+            },
+        });
+
+        if (response.status === 200) {
+            localStorage.removeItem("rsvp");
+            localStorage.removeItem("rsvp_token");
+            toast("RSVP Canceled successfully");
+            setSubmitting(false)
+        }
     }
 
 
@@ -154,7 +190,7 @@ function PreviouslySubmitted() {
         <div className="text-center justify-center">
             <h1 className="text-3xl font-bold">You have previously submitted an RSVP, you may update it below</h1>
             <form className="space-y-4" onSubmit={updateRSVP}>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="md:grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <Label htmlFor="name">Name</Label>
                         <Input id="name" name="name" placeholder="John Doe" defaultValue={name} required />
@@ -172,6 +208,7 @@ function PreviouslySubmitted() {
                     Update
                 </Button>
             </form>
+            <Button variant={"destructive"} onClick={cancelRSVP} className="w-full mt-4">Cancel RSVP</Button>
         </div>
     )
 }
